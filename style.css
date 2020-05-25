@@ -17,12 +17,20 @@ input {
     height: 30px;
 }
 
-ul {
-    list-style: none;
-    margin: 10px 20px;
+.container-element {
+    height: 170px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px 10px;
 }
 
-ul li {
+span {
+    color: white;
+}
+
+i {
     color: white;
 }
 

@@ -1,44 +1,60 @@
-$("button").click(
+var source   = $("#entry-template").html();
 
-    function() {
+var template = Handlebars.compile(source);
 
-        var value = $("input").val()
+$("button").click(find);
 
-        $.ajax({
-            "url" : "https://api.themoviedb.org/3/search/movie",
 
-            "method" : "get",
+function find() {
 
-            "data" : {
+    var value = $("input").val();
 
-                "api_key" : "6ccedbd7f57e862715c5eac090a719e7",
+    $.ajax({
+        "url" : "https://api.themoviedb.org/3/search/movie",
 
-                "query" : value
+        "method" : "get",
 
-            },
+        "data" : {
 
-            "success" : function(answer) {
+            "api_key" : "6ccedbd7f57e862715c5eac090a719e7",
 
-                var filmList = answer.results;
+            "query" : value,
 
-                for (var i = 0; i < filmList.length; i++) {
+            "language" : "it"
 
-                    var title = filmList[i].title;
+        },
 
-                    var titleOriginal = filmList[i].original_title;
+        "success" : function(answer) {
 
-                    var language = filmList[i].original_language;
+            $("main > div").remove();
 
-                    var vote = filmList[i].vote_average;
+            var filmList = answer.results;
 
-                    $('main').append('<ul><li>' + title + '<li>' + titleOriginal + '<li>' + language + '<li>' + vote);
+            for (var i = 0; i < filmList.length; i++) {
 
-                }
-            },
+                var star = Math.ceil(filmList[i].vote_average / 2)
 
-            "error" : console.log("errore")
-        })
+                console.log(star);
 
-    }
+                var context = {
+                    "title" : filmList[i].title,
+                    "titleOriginal" : filmList[i].original_title,
+                    "language" : filmList[i].original_language,
+                };
 
-)
+                var html = template(context);
+
+                $("main").append(html);
+
+                for (var x = 0; x < star; x++) {
+
+                    $(".vote").eq(i).append("<i class='fas fa-star'></i>")
+
+                };
+            };
+        },
+
+        "error" : console.log("errore")
+    })
+
+};

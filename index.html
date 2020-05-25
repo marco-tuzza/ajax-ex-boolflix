@@ -3,8 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Boolflix</title>
-        <link rel="stylesheet" href="style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <script src="https://kit.fontawesome.com/64a279ba36.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <header>
@@ -15,6 +17,14 @@
         <main>
 
         </main>
+        <script id="entry-template" type="text/x-handlebars-template">
+            <div class="container-element">
+                <span class="title">{{title}}</span>
+                <span class="titleOriginal">{{titleOriginal}}</span>
+                <span class="language">{{language}}</span>
+                <span class="vote">{{vote}}</span>
+            </div>
+        </script>
         <script src="main.js" charset="utf-8"></script>
     </body>
 </html>
