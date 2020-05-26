@@ -6,11 +6,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script src="https://kit.fontawesome.com/64a279ba36.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <header>
-            <img src="https://fontmeme.com/permalink/200524/646793dd12cd2fe24043bdf42bce4831.png" alt="">
+            <img class="logo" src="https://fontmeme.com/permalink/200524/646793dd12cd2fe24043bdf42bce4831.png" alt="">
             <input type="text" name="" value="">
             <button type="button" name="search">Cerca</button>
         </header>
@@ -19,10 +20,13 @@
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="container-element">
-                <span class="title">{{title}}</span>
-                <span class="titleOriginal">{{titleOriginal}}</span>
-                <img src="flags/{{language}}.png" alt="">
-                <span class="vote"></span>
+                <span class="title">Titolo: {{title}}</span>
+                <span class="titleOriginal">Titolo Originale: {{titleOriginal}}</span>
+                <div class="flag">
+                    <span>Lingua: </span> {{{language}}}
+                </div>
+                <img class="poster" src="{{poster}}" alt="">
+                <span class="{{vote}}">Voto: </span>
             </div>
         </script>
         <script src="main.js" charset="utf-8"></script>

@@ -2,40 +2,32 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 header {
-    height: 100px;
-    background-color: grey;
+    height: 80px;
+    background-color: rgb(20, 20, 20);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0px 40px;
 }
 
+header:hover {
+    cursor: pointer;
+}
+
+.logo {
+    width: 100px;
+}
+
 input {
     height: 30px;
 }
 
-.container-element {
-    height: 170px;
-    width: 120px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 5px 10px;
-}
-
-.container-element img{
-    width: 20px;
-}
-
-span {
-    color: white;
-}
-
-i {
-    color: white;
+.fa-star {
+    color: #E8C848;
 }
 
 button {
@@ -44,8 +36,49 @@ button {
 }
 
 main {
-    height: calc(100vh - 100px);
-    background-color: black;
+    height: calc(100vh - 80px);
+    background-color: rgb(20, 20, 20);
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+    padding: 10px 20px;
+    overflow-y: scroll;
+}
+
+.container-element {
+    height: 250px;
+    width: 175px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 5px 10px;
+    position: relative;
+    padding: 20px;
+}
+
+.container-element span {
+    overflow: hidden;
+}
+
+.container-element:hover {
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.container-element:hover .poster {
+    display: none;
+}
+
+.poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+span {
+    color: white;
 }
