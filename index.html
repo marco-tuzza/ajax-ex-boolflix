@@ -22,22 +22,36 @@
                 </ul>
             </div>
             <div class="header-right">
-                <input type="text" name="" value="">
-                <button type="button" name="search">Cerca</button>
+                <div class="input">
+                    <input type="text" name="" value="" placeholder="Titoli, persone, generi">
+                    <i class="fas fa-search search"></i>
+                </div>
+                <ul>
+                    <li><i id="search-button" class="fas fa-search"></i></li>
+                    <li><i class="fas fa-gift"></i></li>
+                    <li><i class="fas fa-bell"></i></li>
+                </ul>
+                <img src="https://secure.gravatar.com/avatar/fb9816f251895f89f7cc6d9c8d578dc7?s=140&d=retro&r=g" alt="">
             </div>
         </header>
         <main>
 
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
-            <div class="container-element">
-                <span class="title">Titolo: {{title}}</span>
-                <span class="titleOriginal">Titolo Originale: {{titleOriginal}}</span>
-                <div class="flag">
-                    <span>Lingua: </span> {{{language}}}
+            <div class="element">
+                <div class="container-element">
+                    <div class="front">
+                        <img class="poster" src="{{poster}}" alt="">
+                    </div>
+                    <div class="back">
+                        <span class="title">Titolo: {{title}}</span>
+                        <span class="titleOriginal">Titolo Originale: {{titleOriginal}}</span>
+                        <div class="flag">
+                            <span>Lingua: </span> {{{language}}}
+                        </div>
+                        <span class="{{vote}}">Voto: </span>
+                    </div>
                 </div>
-                <img class="poster" src="{{poster}}" alt="">
-                <span class="{{vote}}">Voto: </span>
             </div>
         </script>
         <script src="main.js" charset="utf-8"></script>

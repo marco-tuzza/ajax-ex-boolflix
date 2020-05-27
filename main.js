@@ -5,8 +5,17 @@ var template = Handlebars.compile(source);
 
 var posterBase = "https://image.tmdb.org/t/p/w185"
 
-$("button").click(find);
+$(document).on('keypress',function(e) {
+    if(e.which == 13 && $("input").is(":focus")) {
+        find();
+    }
+});
 
+$("#search-button").click(inputShow)
+
+$("main, .header-left").click(inputHide)
+
+$(".logo").click(cleanMain)
 
 function find() {
 
@@ -32,6 +41,8 @@ function find() {
         "success" : function(answer) {
 
             var filmList = answer.results;
+
+            console.log(filmList);
 
             for (var i = 0; i < filmList.length; i++) {
 
@@ -195,3 +206,29 @@ function find() {
     })
 
 };
+
+function inputShow() {
+
+    $(".fa-search").hide()
+
+    $("input").show()
+
+    $(".search").show()
+
+}
+
+function inputHide() {
+
+    $(".fa-search").show()
+
+    $("input").hide()
+
+    $(".search").hide()
+
+}
+
+function cleanMain() {
+
+    $(".container-element").remove()
+
+}
