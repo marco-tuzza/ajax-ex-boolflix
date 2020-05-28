@@ -19,9 +19,9 @@ $(".logo").click(cleanMain)
 
 function find() {
 
-    $("main > div").remove();
-
     var value = $("input").val();
+
+    cleanMain()
 
     $.ajax({
         "url" : "https://api.themoviedb.org/3/search/movie",
@@ -42,71 +42,11 @@ function find() {
 
             var filmList = answer.results;
 
-            console.log(filmList);
-
             for (var i = 0; i < filmList.length; i++) {
 
-                var star = Math.ceil(filmList[i].vote_average / 2)
+                context(filmList[i], "film")
 
-                var context = {
-
-                    "title" : filmList[i].title,
-
-                    "titleOriginal" : filmList[i].original_title,
-
-                    "vote" : "voteFilm",
-
-                    "language" : function() {
-
-                        var languages = ["it" , "fr", "en", "de"]
-
-                        if (languages.includes(filmList[i].original_language)) {
-
-                            return "<img src='flags/" + filmList[i].original_language + ".png'>"
-
-                            console.log("Ok");
-
-                        } else {
-
-                            return "<span>" + filmList[i].original_language + "</span>"
-
-                            console.log("No");
-
-                        }
-
-                    },
-
-                    "poster" :
-
-                    function() {
-
-                    if (filmList[i].poster_path == null) {
-
-                        return "img/boolean.png"
-
-                    } else {
-
-                        return posterBase + filmList[i].poster_path
-                    }
-
-                    }
-                };
-
-                var html = template(context);
-
-                $("main").append(html);
-
-                for (var x = 0; x < star; x++) {
-
-                    $(".voteFilm").eq(i).append("<i class='fas fa-star'></i>")
-
-                };
-
-                for (var x = 0; x < 5-star; x++) {
-
-                $(".voteFilm").eq(i).append("<i class='far fa-star'></i>")
-
-                };
+                vote (filmList[i].vote_average, i, "film")
 
             };
         },
@@ -135,69 +75,13 @@ function find() {
 
             var tvList = answer.results;
 
+            console.log(tvList);
+
             for (var i = 0; i < tvList.length; i++) {
 
-                var star = Math.ceil(tvList[i].vote_average / 2)
+                context(tvList[i], "tv")
 
-                var context = {
-
-                    "title" : tvList[i].name,
-
-                    "titleOriginal" : tvList[i].original_name,
-
-                    "vote" : "voteTv",
-
-                    "language" : function() {
-
-                        var languages = ["it" , "fr", "en", "de"]
-
-                        if (languages.includes(tvList[i].original_language)) {
-
-                            return "<img src='flags/" + tvList[i].original_language + ".png'>"
-
-                            console.log("Ok");
-
-                        } else {
-
-                            return "<span>" + tvList[i].original_language + "</span>"
-
-                            console.log("No");
-
-                        }
-
-                    },
-
-                    "poster" :
-
-                    function() {
-
-                    if (tvList[i].poster_path == null) {
-
-                        return "img/boolean.png"
-
-                    } else {
-
-                      return posterBase + tvList[i].poster_path
-
-                    }
-                    }
-                }
-
-                var html = template(context);
-
-                $("main").append(html);
-
-                for (var x = 0; x < star; x++) {
-
-                    $(".voteTv").eq(i).append("<i class='fas fa-star'></i>")
-
-                };
-
-                for (var x = 0; x < 5-star; x++) {
-
-                    $(".voteTv").eq(i).append("<i class='far fa-star'></i>")
-
-                };
+                vote (tvList[i].vote_average, i, "tv")
 
             };
         },
@@ -229,6 +113,126 @@ function inputHide() {
 
 function cleanMain() {
 
-    $(".container-element").remove()
+    $(".element").remove()
+
+}
+
+function vote(filmVote, a, type) {
+
+    var star = Math.ceil(filmVote / 2)
+
+    for (var x = 0; x < star; x++) {
+
+        if (type == "film") {
+
+            $(".vote-film").eq(a).append("<i class='fas fa-star'></i>")
+
+        } else {
+
+            $(".vote-tv").eq(a).append("<i class='fas fa-star'></i>")
+
+        }
+
+    };
+
+    for (var x = 0; x < 5-star; x++) {
+
+        if (type == "film") {
+
+            $(".vote-film").eq(a).append("<i class='far fa-star'></i>")
+
+        } else {
+
+            $(".vote-tv").eq(a).append("<i class='far fa-star'></i>")
+
+        }
+
+    };
+
+}
+
+function context(data, type) {
+
+    var context = {
+
+        "title" : function() {
+
+            if (type == "film") {
+
+                return data.title
+
+            } else {
+
+                return data.name
+
+            }
+
+        },
+
+        "titleOriginal" : function () {
+
+            if (type == "film") {
+
+                return data.original_title
+
+            } else {
+
+                return data.original_name
+
+            }
+        },
+
+        "type" : function () {
+
+            if (type == "film") {
+
+                return "film"
+
+            } else {
+
+                return "tv"
+
+            }
+        },
+
+        "language" : function() {
+
+            var languages = ["it" , "fr", "en", "de"]
+
+            if (languages.includes(data.original_language)) {
+
+                return "<img src='flags/" + data.original_language + ".png'>"
+
+                console.log("Ok");
+
+            } else {
+
+                return "<span>" + data.original_language + "</span>"
+
+                console.log("No");
+
+            }
+
+        },
+
+        "poster" :
+
+        function() {
+
+        if (data.poster_path == null) {
+
+            return "img/boolean.png"
+
+        } else {
+
+            return posterBase + data.poster_path
+        }
+
+        }
+    };
+
+    var html = template(context);
+
+    $("main").append(html);
 
 }
