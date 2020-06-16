@@ -117,6 +117,8 @@ function cleanMain() {
 
 }
 
+//Semplificare for rendendolo uno solo
+
 function vote(filmVote, a, type) {
 
     var star = Math.ceil(filmVote / 2)
